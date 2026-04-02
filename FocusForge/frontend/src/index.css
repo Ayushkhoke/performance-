@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-500: #22C55E;
+  --color-primary-600: #16A34A;
+  --color-secondary-500: #8B5CF6;
+  --color-gold: #FACC15;
+}
+
+@layer base {
+  body {
+    background: linear-gradient(to bottom right, #0F172A, #020617);
+    color: #E5E7EB;
+    min-height: 100vh;
+  }
+}
