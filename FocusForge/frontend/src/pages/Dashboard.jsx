@@ -66,7 +66,7 @@ const Dashboard = () => {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <header className="mb-8 flex justify-between items-end">
+      <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end">
         <div>
           <h1 className="text-3xl font-bold text-white tracking-tight drop-shadow-sm">Pirate Dashboard</h1>
           <p className="text-gray-400 mt-1">Track your crew's progress and bounty.</p>
@@ -77,9 +77,9 @@ const Dashboard = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="bg-[#111827] border border-gold/30 px-6 py-3 rounded-2xl shadow-[0_0_20px_rgba(250,204,21,0.15)] flex flex-col items-end relative overflow-hidden"
+          className="bg-[#111827] border border-gold/30 px-4 sm:px-6 py-3 rounded-2xl shadow-[0_0_20px_rgba(250,204,21,0.15)] flex flex-col items-start sm:items-end relative overflow-hidden w-full sm:w-auto"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gold/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-r from-transparent to-gold/5 pointer-events-none" />
           <span className="text-xs uppercase font-bold tracking-widest text-gold/80 mb-1 flex items-center gap-2">
             <Skull className="w-3 h-3" /> Total Bounty
           </span>

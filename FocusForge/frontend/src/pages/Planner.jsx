@@ -90,15 +90,15 @@ const Planner = () => {
             <motion.div 
               initial={{ scale: 0.8, y: 50 }}
               animate={{ scale: 1, y: 0 }}
-              className={`bg-[#111827] border ${unlockedCharacter.rarity === 'Legendary' ? 'border-gold shadow-[0_0_50px_rgba(250,204,21,0.3)]' : 'border-[#1F2937]'} p-8 rounded-2xl max-w-sm w-full text-center relative overflow-hidden`}
+              className={`bg-[#111827] border ${unlockedCharacter.rarity === 'Legendary' ? 'border-gold shadow-[0_0_50px_rgba(250,204,21,0.3)]' : 'border-[#1F2937]'} p-5 sm:p-8 rounded-2xl max-w-sm w-[92%] text-center relative overflow-hidden`}
             >
               {unlockedCharacter.rarity === 'Legendary' && (
-                <div className="absolute inset-0 bg-gradient-to-tr from-gold/10 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-tr from-gold/10 to-transparent pointer-events-none" />
               )}
               <h2 className="text-3xl font-bold text-white tracking-wider mb-2 drop-shadow-md">New Crew Member Joined!</h2>
               <p className="text-primary-400 font-mono mb-6">Bounty increased!</p>
               
-              <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#1F2937] shadow-2xl">
+              <div className="relative w-36 h-36 sm:w-48 sm:h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#1F2937] shadow-2xl">
                 <img src={unlockedCharacter.image} alt={unlockedCharacter.name} className="w-full h-full object-cover bg-gray-800" />
               </div>
 
@@ -118,7 +118,7 @@ const Planner = () => {
         )}
       </AnimatePresence>
 
-      <header className="flex items-end justify-between mb-2">
+      <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-2">
         <div>
           <h1 className="text-3xl font-bold text-white tracking-tight drop-shadow-sm">Daily Planner</h1>
           <p className="text-gray-400 mt-1">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
@@ -143,12 +143,12 @@ const Planner = () => {
 
       {rewardError && (
         <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl flex items-center gap-3">
-          <ShieldAlert className="w-5 h-5 flex-shrink-0" />
+          <ShieldAlert className="w-5 h-5 shrink-0" />
           <p className="text-sm font-medium">{rewardError}</p>
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
         {/* Task List - LeetCode Style Dark */}
         <div className="lg:col-span-2 space-y-4">
           <div className="bg-[#111827] rounded-2xl shadow-xl border border-[#1F2937] overflow-hidden">
@@ -175,12 +175,12 @@ const Planner = () => {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className={`p-4 hover:bg-[#1f2937]/50 transition-colors flex items-center justify-between group ${task.completed ? 'bg-[#0f172a]/50' : ''}`}
+                      className={`p-4 hover:bg-[#1f2937]/50 transition-colors flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between group ${task.completed ? 'bg-[#0f172a]/50' : ''}`}
                     >
                       <div className="flex items-start gap-4 flex-1">
                         <button 
                           onClick={() => toggleTask(task)}
-                          className="mt-1 flex-shrink-0 focus:outline-none relative"
+                          className="mt-1 shrink-0 focus:outline-none relative"
                         >
                           {task.completed ? (
                             <div className="w-6 h-6 rounded bg-primary-500 flex items-center justify-center shadow-[0_0_10px_rgba(34,197,94,0.5)]">
@@ -201,7 +201,7 @@ const Planner = () => {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-4 ml-4">
+                      <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto sm:ml-4 justify-between sm:justify-start">
                         <span className={`px-2.5 py-1 text-xs font-semibold rounded-full border ${getPriorityColor(task.priority)}`}>
                           {task.priority}
                         </span>
@@ -273,7 +273,7 @@ const Planner = () => {
 
               <button 
                 type="submit"
-                className="w-full py-2.5 mt-2 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold rounded-lg shadow-[0_0_10px_rgba(34,197,94,0.3)] transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 mt-2 bg-linear-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-bold rounded-lg shadow-[0_0_10px_rgba(34,197,94,0.3)] transition-all flex items-center justify-center gap-2"
               >
                 Accept Quest
               </button>

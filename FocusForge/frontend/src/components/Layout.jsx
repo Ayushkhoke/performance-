@@ -13,7 +13,7 @@ const Layout = () => {
   return (
     <div className="flex min-h-screen bg-transparent">
       <Navbar />
-      <main className="flex-1 md:ml-64 p-8 overflow-y-auto">
+      <main className="flex-1 md:ml-64 pt-20 md:pt-8 px-4 sm:px-6 md:px-8 pb-6 overflow-y-auto">
         <div className="max-w-6xl mx-auto">
           <Outlet />
         </div>

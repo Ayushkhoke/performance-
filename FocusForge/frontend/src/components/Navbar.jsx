@@ -1,12 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
-import { LayoutDashboard, CheckSquare, LogOut, Code2, Users, Trophy } from 'lucide-react';
+import { LayoutDashboard, CheckSquare, LogOut, Code2, Users, Trophy, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const handleLogout = () => {
     logout();
@@ -32,8 +37,8 @@ const Navbar = () => {
     );
   };
 
-  return (
-    <nav className="fixed w-64 h-screen bg-[#111827]/80 backdrop-blur-xl border-r border-[#1F2937] p-6 flex flex-col shadow-2xl z-50">
+  const NavContent = () => (
+    <>
       <div className="flex items-center gap-2 mb-10 pl-2">
         <Code2 className="text-primary-500 w-8 h-8 drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
         <span className="text-2xl font-bold tracking-tight text-white drop-shadow-md">
@@ -55,7 +60,7 @@ const Navbar = () => {
 
       <div className="mt-auto border-t border-[#1F2937] pt-6">
         <div className="flex items-center gap-3 mb-6 px-4">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-lg shadow-[0_0_10px_rgba(34,197,94,0.3)] ring-2 ring-[#1F2937]">
+          <div className="w-10 h-10 rounded-full bg-linear-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-lg shadow-[0_0_10px_rgba(34,197,94,0.3)] ring-2 ring-[#1F2937]">
             {user.name.charAt(0).toUpperCase()}
           </div>
           <div className="overflow-hidden">
@@ -73,7 +78,45 @@ const Navbar = () => {
           Sign Out
         </button>
       </div>
-    </nav>
+    </>
+  );
+
+  return (
+    <>
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#111827]/90 backdrop-blur-xl border-b border-[#1F2937] px-4 flex items-center justify-between z-50">
+        <div className="flex items-center gap-2">
+          <Code2 className="text-primary-500 w-6 h-6" />
+          <span className="text-lg font-bold tracking-tight text-white">
+            Focus<span className="text-primary-500">Forge</span>
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+          className="p-2 rounded-lg border border-[#1F2937] text-gray-200 hover:bg-[#1f2937]/70"
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {isMobileMenuOpen && (
+        <button
+          type="button"
+          aria-label="Close mobile menu overlay"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+        />
+      )}
+
+      <nav className={`fixed top-16 left-0 bottom-0 w-[86%] max-w-xs bg-[#111827]/95 backdrop-blur-xl border-r border-[#1F2937] p-5 flex flex-col shadow-2xl z-50 transform transition-transform duration-300 md:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <NavContent />
+      </nav>
+
+      <nav className="hidden md:flex fixed w-64 h-screen bg-[#111827]/80 backdrop-blur-xl border-r border-[#1F2937] p-6 flex-col shadow-2xl z-50">
+        <NavContent />
+      </nav>
+    </>
   );
 };
 
